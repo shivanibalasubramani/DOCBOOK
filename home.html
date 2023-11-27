@@ -25,6 +25,232 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
+  <style>
+  
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+
+@blue: #066ddb;
+@orange: #db5006;
+
+
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.tab-focus(){
+
+  outline: thin dotted;
+
+  outline: 5px auto -webkit-focus-ring-color;
+  outline-offset: -2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  border: 0;
+}
+
+
+form.appt-calendar-wrapper {
+	.clearfix;
+	margin: 0 auto;
+	width: 450px;
+	
+	> .appt-calendar {
+		float: left;
+		width: 65%;
+		
+		> .month-controls {
+			display: flex;
+			margin: 0 0 5px;
+			
+			> .prev,
+			> .next {
+				border-radius: 3px;
+				flex-basis: 0;
+				flex-grow: 1;
+				flex-shrink: 1;
+        font-size: 26px;
+				padding: 5px;
+				text-align: center;
+				
+				&:hover {
+					background:blue;
+					color: #fff;
+				}
+			}
+			
+			> p {
+				flex-basis: 0;
+				flex-grow: 5;
+				flex-shrink: 5;
+        font-size: 22px;
+				font-weight: bold;
+				margin: 0;
+				padding: 10px 0 0;
+				text-align: center;
+			}
+		}
+		
+		> .week {
+			clearfix;
+			display: flex;
+			margin: 0 0 5px;
+			
+			> label {
+				flex-basis: 0;
+				flex-grow: 1;
+				flex-shrink: 1;
+				padding: 6px;
+				position: relative;
+				
+				& + label,
+				& + .day {
+					margin: 0 0 0 5px;
+					font-size: 100%;
+					font-weight: normal;
+					text-transform: none;
+				}
+					
+				> .day {
+					background: lighten(blue, 35%);
+					left: 0px;
+					padding: 6px 0;
+					position: absolute;
+					top: 0px;
+					text-align: center;
+					width: 100%;
+					
+					&:hover {
+						background: blue;
+						color: #fff;
+					}
+				}
+				
+				> input[type="radio"] {
+					position: absolute;
+				  clip: rect(0,0,0,0);
+				  pointer-events: none;
+				  
+				  &:focus ~ .day {
+				  	.tab-focus();
+				  }
+				  
+				  &:checked ~ .day {
+				  	background: orange;
+				  	color: #fff;
+				  	
+				  	&:hover {
+				  		background: orange;
+				  		color: #fff;
+				  	}
+				  }
+				}
+			}
+			
+			> .day {
+				flex-basis: 0;
+				flex-grow: 1;
+				flex-shrink: 1;
+				padding: 6px;
+				text-align: center;
+				
+				& + .day,
+				& + label {
+					margin: 0 0 0 5px;
+					font-size: 100%;
+					font-weight: normal;
+					text-transform: none;
+				}
+				
+				&.sat,
+				&.sun,
+				&.off {
+					background: #ccc;
+					color: #666;
+				}
+				
+				&.out {
+					background: #eee;
+					color: #444;
+				}
+			}
+			
+			&.legend {
+				
+				> .day {
+					background: transparent;
+					padding: 0 6px;
+				}
+			}
+		}
+	}
+	
+	> .appt-times {
+		float: left;
+		height: 275px;
+		margin: 0 0 0 15px;
+		position: relative;
+		width: 30%;
+		
+		> label {
+			bottom: 0px;
+			display: block;
+			margin: 0;
+			position: absolute;
+			width: 100%;
+			
+			> select {
+				display: block;
+				font-size: 18px;
+				height: 205px;
+				margin-top: 7px;
+				width: 100%;
+				
+				> option {
+					padding: 5px;
+					
+					&:hover {
+						background: blue;
+						color: #fff;
+					}
+					
+					&:checked {
+						background-color: orange;
+						background-image: linear-gradient(orange, orange);
+						color: #fff;
+						
+						&:hover {
+							background-color: orange;
+							background-image: linear-gradient(orange, orange);
+							color: #fff;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+  </style>
 </head>
  
 <body>
@@ -55,7 +281,9 @@
           <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
           <li><a class="nav-link scrollto" href="#about">About</a></li>
           <li><a class="nav-link scrollto" href="#services">Services</a></li>
-      
+          <li><a class="nav-link scrollto" href="#departments">Departments</a></li>
+          <li><a class="nav-link scrollto" href="#doctors">Doctors</a></li>
+         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav>
@@ -280,9 +508,9 @@
             <div class="col-md-4 form-group mt-3">
               <select name="doctor" id="doctor" class="form-select">
                 <option value="">Select Doctor</option>
-                <option value="Doctor 1">Kavipriyan.MBBS,MD Dermatologist</option>
-                <option value="Doctor 2">Jagadeeshwaran.MBBS,MD Cardiologist</option>
-                <option value="Doctor 3">Jayasoorya.MBBS,MD ENT </option>
+                <option value="Doctor 1">Kavipriyan.MBBS,MD</option>
+                <option value="Doctor 2">Jagadeeshwaran.MBBS,MD</option>
+                <option value="Doctor 3">Jayasoorya.MBBS,MD</option>
               </select>
             <div class="text-center"><button type="button" onclick="validateLogin()">Make an Appointment</button></div>
             </div>
@@ -295,7 +523,243 @@
               alert("Your appointment request has been sent successfully. Thank you!");
     }
         </script>
-      
+    <form class="appt-calendar-wrapper">
+      <div class="appt-calendar">
+        <div class="month-controls">
+          <span class="prev">&laquo;</span>
+          <p>May 2016</p>
+          <span class="next">&raquo;</span>
+        </div>
+        <div class="week legend">
+          <div class="day sun" aria-hidden="true">S</div>
+          <div class="day mon" aria-hidden="true">M</div>
+          <div class="day tue" aria-hidden="true">T</div>
+          <div class="day wed" aria-hidden="true">W</div>
+          <div class="day thu" aria-hidden="true">R</div>
+          <div class="day fri" aria-hidden="true">F</div>
+          <div class="day sat" aria-hidden="true">S</div>
+        </div>
+        <div class="week">
+          <div id="0501" class="day sun off">1</div>
+          <div id="0502" class="day mon off">2</div>
+          <div id="0503" class="day tue off">3</div>
+          <div id="0504" class="day wed off">4</div>
+          <div id="0505" class="day thu off">5</div>
+          <div id="0506" class="day fri off">6</div>
+          <div id="0507" class="day sat off">7</div>
+        </div>
+        <div class="week">
+          <div id="0508" class="day sun off">8</div>
+          <div id="0509" class="day mon off">9</div>
+          <div id="0510" class="day tue off">10</div>
+          <div id="0511" class="day wed off">11</div>
+          <div id="0512" class="day thu off">12</div>
+          <div id="0513" class="day fri off">13</div>
+          <div id="0514" class="day sat off">14</div>
+        </div>
+        <div class="week">
+          <div id="0515" class="day sun off">15</div>
+          <div id="0516" class="day mon off">16</div>
+          <div id="0517" class="day tue off">17</div>
+          <div id="0518" class="day wed off">18</div>
+          <div id="0519" class="day thu off">19</div>
+          <div id="0520" class="day fri off">20</div>
+          <div id="0521" class="day sat off">21</div>
+        </div>
+        <div class="week">
+          <div id="0522" class="day sun off">22</div>
+          <div id="0523" class="day mon off">23</div>
+          <label>
+            <input type="radio" name="apptDay" id="0524" value="0524" checked="checked">
+            <span class="day tue selected"><span class="sr-only">Tuesday, May </span>24</span>
+          </label>
+          <label>
+            <input type="radio" name="apptDay" id="0525" value="0525">
+            <span class="day wed"><span class="sr-only">Wednesday, May </span>25</span>
+          </label>
+          <label>
+            <input type="radio" name="apptDay" id="0526" value="0526">
+            <span  class="day thu"><span class="sr-only">Thursday, May </span>26</span>
+          </label>
+          <label>
+            <input type="radio" name="apptDay" id="0527" value="0527">
+            <span  class="day fri"><span class="sr-only">Friday, May </span>27</span>
+          </label>
+          <div id="0528" class="day sat">28</div>
+        </div>
+        <div class="week">
+          <div id="0529" class="day sun">29</div>
+          <label>
+            <input type="radio" name="apptDay" id="0530" value="0530">
+            <span  class="day mon"><span class="sr-only">Monday, May </span>30</span>
+          </label>
+          <label>
+            <input type="radio" name="apptDay" id="0531" value="0531">
+            <span  class="day tue"><span class="sr-only">Tuesday, May </span>31</span>
+          </label>
+          <div id="0601" class="day wed out">1</div>
+          <div id="0602" class="day thu out">2</div>
+          <div id="0603" class="day fri out">3</div>
+          <div id="0604" class="day sat">4</div>
+        </div>
+      </div>
+      <div class="appt-times">
+        <label for="times">
+          Available times:
+          <select id="times" name="time" size="7">
+            <option value="1300">1:00 PM</option>
+            <option value="1315">1:15 PM</option>
+            <option value="1330">1:30 PM</option>
+            <option value="1345">1:45 PM</option>
+            <option value="1400">2:00 PM</option>
+            <option value="1415">2:15 PM</option>
+            <option value="1430">2:30 PM</option>
+          </select>
+        </label>
+      </div>
+    </form>
+    <script>
+      $(function(){
+  var calendar = $('.appt-calendar');
+  var days = calendar.find('.day');
+  var timePicker = $('#times');
+  var times = {
+    'times-0524':
+      '<option value="1300">1:00 PM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1330">1:30 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1430">2:30 PM</option>',
+    'times-0525':
+      '<option value="1115">11:15 AM</option>' +
+      '<option value="1130">11:30 AM</option>' +
+      '<option value="1145">11:45 AM</option>' +
+      '<option value="1215">12:15 AM</option>' +
+      '<option value="1230">12:30 AM</option>' +
+      '<option value="1300">1:00 PM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1445">2:45 PM</option>' +
+      '<option value="1515">3:15 PM</option>' +
+      '<option value="1545">3:45 PM</option>',
+    'times-0526':
+      '<option value="1000">10:00 AM</option>' +
+      '<option value="1015">10:15 AM</option>' +
+      '<option value="1030">10:30 AM</option>' +
+      '<option value="1045">10:45 AM</option>' +
+      '<option value="1100">11:00 AM</option>' +
+      '<option value="1115">11:15 AM</option>' +
+      '<option value="1130">11:30 AM</option>' +
+      '<option value="1145">11:45 AM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1330">1:30 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1430">2:30 PM</option>' +
+      '<option value="1445">2:45 PM</option>' +
+      '<option value="1500">3:00 PM</option>',
+    'times-0527':
+      '<option value="0900">9:00 AM</option>' +
+      '<option value="0915">9:15 AM</option>' +
+      '<option value="0930">9:30 AM</option>' +
+      '<option value="0945">9:45 AM</option>' +
+      '<option value="1015">10:15 AM</option>' +
+      '<option value="1045">10:45 AM</option>' +
+      '<option value="1100">11:00 AM</option>' +
+      '<option value="1115">11:15 AM</option>' +
+      '<option value="1130">11:30 AM</option>' +
+      '<option value="1145">11:45 AM</option>' +
+      '<option value="1215">12:15 AM</option>' +
+      '<option value="1230">12:30 AM</option>' +
+      '<option value="1245">12:45 AM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1430">2:30 PM</option>' +
+      '<option value="1445">2:45 PM</option>' +
+      '<option value="1500">3:00 PM</option>' +
+      '<option value="1515">3:15 PM</option>' +
+      '<option value="1530">3:30 PM</option>' +
+      '<option value="1545">3:45 PM</option>',
+    'times-0530':
+      '<option value="0800">8:00 AM</option>' +
+      '<option value="0815">8:15 AM</option>' +
+      '<option value="0830">8:30 AM</option>' +
+      '<option value="0845">8:45 AM</option>' +
+      '<option value="0900">9:00 AM</option>' +
+      '<option value="0915">9:15 AM</option>' +
+      '<option value="0945">9:45 AM</option>' +
+      '<option value="1015">10:15 AM</option>' +
+      '<option value="1030">10:30 AM</option>' +
+      '<option value="1045">10:45 AM</option>' +
+      '<option value="1100">11:00 AM</option>' +
+      '<option value="1115">11:15 AM</option>' +
+      '<option value="1145">11:45 AM</option>' +
+      '<option value="1200">12:00 AM</option>' +
+      '<option value="1215">12:15 AM</option>' +
+      '<option value="1230">12:30 AM</option>' +
+      '<option value="1245">12:45 AM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1330">1:30 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1430">2:30 PM</option>' +
+      '<option value="1445">2:45 PM</option>' +
+      '<option value="1500">3:00 PM</option>' +
+      '<option value="1515">3:15 PM</option>' +
+      '<option value="1530">3:30 PM</option>' +
+      '<option value="1545">3:45 PM</option>',
+    'times-0531':
+      '<option value="0700">7:00 AM</option>' +
+      '<option value="0715">7:15 AM</option>' +
+      '<option value="0730">7:30 AM</option>' +
+      '<option value="0745">7:45 AM</option>' +
+      '<option value="0800">8:00 AM</option>' +
+      '<option value="0815">8:15 AM</option>' +
+      '<option value="0830">8:30 AM</option>' +
+      '<option value="0845">8:45 AM</option>' +
+      '<option value="0900">9:00 AM</option>' +
+      '<option value="0915">9:15 AM</option>' +
+      '<option value="0930">9:30 AM</option>' +
+      '<option value="0945">9:45 AM</option>' +
+      '<option value="1000">10:00 AM</option>' +
+      '<option value="1015">10:15 AM</option>' +
+      '<option value="1030">10:30 AM</option>' +
+      '<option value="1045">10:45 AM</option>' +
+      '<option value="1100">11:00 AM</option>' +
+      '<option value="1115">11:15 AM</option>' +
+      '<option value="1130">11:30 AM</option>' +
+      '<option value="1145">11:45 AM</option>' +
+      '<option value="1200">12:00 AM</option>' +
+      '<option value="1215">12:15 AM</option>' +
+      '<option value="1230">12:30 AM</option>' +
+      '<option value="1245">12:45 AM</option>' +
+      '<option value="1300">1:00 PM</option>' +
+      '<option value="1315">1:15 PM</option>' +
+      '<option value="1330">1:30 PM</option>' +
+      '<option value="1345">1:45 PM</option>' +
+      '<option value="1400">2:00 PM</option>' +
+      '<option value="1415">2:15 PM</option>' +
+      '<option value="1430">2:30 PM</option>' +
+      '<option value="1445">2:45 PM</option>' +
+      '<option value="1500">3:00 PM</option>' +
+      '<option value="1515">3:15 PM</option>' +
+      '<option value="1530">3:30 PM</option>' +
+      '<option value="1545">3:45 PM</option>'
+  };
+  
+  $('input[name="apptDay"]').change(function(){
+    timePicker.html(times['times-' + $(this).val()])
+  });
+});
+    </script>
 
       </div>
     </section>
